@@ -1,0 +1,2092 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/7/2019 4:46:23 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DEVSERVER"
+  DTS:CreatorName="SPOTEFFECTS\rawomolo"
+  DTS:DTSID="{F86D30CD-9742-4F2D-848C-804FD5F2FB5E}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.7001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SSAS_PowerBIScript"
+  DTS:PackageType="5"
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{72EE93DA-42B7-4C0A-995F-EBB26B9DAA7C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[pbireport.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{86495035-5C9E-4E5F-868A-A5D1AAC82401}"
+      DTS:ObjectName="pbireport.csv">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::FileInstance] + @[$Project::ShareFolder]  +  @[$Project::SSAS_ProcessFolder] + @[$Package::exportFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\var\SQL2012_Test1\share\SSAS\Process\pbireport.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSASProcessPBIReport]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{2A6AB611-E365-4511-B44D-2B5040A38AD5}"
+      DTS:ObjectName="SSASProcessPBIReport">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::FileInstance] + @[$Project::ShareFolder] + @[$Project::SSAS_ProcessFolder] +  @[$Package::exportFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowsToSkip="1"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\var\SQL2012_Test1\share\SSAS\Process\pbireport.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ReportID"
+              DTS:DTSID="{D141AB39-16F9-4182-935A-73135A75189A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ReportName"
+              DTS:DTSID="{D3989397-A43F-4002-857E-D357C4CEBA6C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ReportURL"
+              DTS:DTSID="{DF22A66B-8CA5-4336-83CD-650EB708902F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ReportDatasetID"
+              DTS:DTSID="{D15FEB1F-4A4A-4231-8DB0-CA8B468EBAE1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WorkspaceID"
+              DTS:DTSID="{869DEC9C-D588-40EA-92AC-01E49341DE5A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WorkspaceName"
+              DTS:DTSID="{4AF606D7-D90E-4461-9654-406613805E79}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{2EC1C8E6-5205-4AE5-8FBD-94A60CECA517}"
+      DTS:ObjectName="exportFileName"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">pbireport.csv</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{770F74CF-EA8A-458B-9705-E391500EB1A7}"
+      DTS:ObjectName="pbipassword"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">spefAzure2017!</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{0B12CD11-16D4-4E07-80CA-B0FC96F6F3E8}"
+      DTS:ObjectName="pbiusername"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">input@spoteffects.com</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{DAE77E4D-DDC1-4D89-AB79-CBDC727CBE48}"
+      DTS:ObjectName="pck_ParentPckID">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{19CA2493-D239-409E-A5E1-B9324CB71243}"
+      DTS:ObjectName="powerShellFileName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">ExportPowerBIReportScript.ps1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{8531D2A5-DA7B-46BF-BABF-AD20479B0C5C}"
+      DTS:ObjectName="powerShellFilePath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\var\SQL2012_Test1\share\SSAS\Templates\</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0647475F-8E90-4F64-886A-5DA328E4DDCC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::exportFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="exportFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">pbireport.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EAB9C880-FEB8-4820-BE5B-6829CE18B63C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::FileInstance] + @[$Project::ShareFolder]  +  @[$Project::SSAS_TransferFolder]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="exportFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\var\SQL2012_Test1\share\SSAS\Transfer\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DCA466BC-184D-43BC-8AA7-FDD474F4AAD5}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::exportFilePath] + @[User::exportFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="exportFullName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\var\SQL2012_Test1\share\SSAS\Transfer\pbireport.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2EB61EB0-4105-4AA7-A5E1-2942F7DD562E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="insertedRows">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC8401D5-AFCE-4E5A-AC08-CF6AE484839D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="mail_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{442E8CD5-035C-4510-B8EA-3A08353F03DD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="mail_log_level">
+      <DTS:VariableValue
+        DTS:DataType="3">2</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8282535D-D883-4932-B56E-D659189300AD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="mail_text_in">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0D86A404-51D7-481C-B2E9-3695686F7BC9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="mail_type">
+      <DTS:VariableValue
+        DTS:DataType="8">PowerBI Reports</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{379FB40E-6C0E-4FC2-9E0F-8E0FC015945C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="pck_BP">
+      <DTS:VariableValue
+        DTS:DataType="8">&lt;SSAS&gt;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{78CAFFE8-DE79-4F47-ACB6-1D95FF353190}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="pck_ExecDesc">
+      <DTS:VariableValue
+        DTS:DataType="8">Power BI Reports</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F8161DE7-6ECB-4AAB-A120-2FAFA35FE62A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="pck_PckID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{95937DC3-2BC4-4EDF-8928-D59511FD2482}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 5) @[System::VersionMajor]+&quot;.&quot;+ (DT_WSTR, 5) @[System::VersionMinor]+&quot;.&quot;+ (DT_WSTR, 5) @[System::VersionBuild]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="pck_Version">
+      <DTS:VariableValue
+        DTS:DataType="8">1.0.73</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B0618E7A-5ECA-4D59-ABE6-0262314D4F07}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::powerShellFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="powerShellFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">ExportPowerBIReportScript.ps1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5AFC022C-1D88-437A-8A4D-A73CDF811FC4}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::powerShellFilePath]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="powerShellFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\var\SQL2012_Test1\share\SSAS\Templates\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{894DDE14-F3ED-46F1-9B02-75FF1D7A4EB4}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::FileInstance] + @[$Project::ShareFolder] +  @[$Project::SSAS_ProcessFolder] +  @[$Package::exportFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="processedfilename">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\var\SQL2012_Test1\share\SSAS\Process\pbireport.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0EDBBC35-B8C9-415F-9EFF-2440AEC3A8F0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="target_table_name">
+      <DTS:VariableValue
+        DTS:DataType="8">cfg_lkp_SSAS_PowerBIReports</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Audit Package End"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{20f69104-94d4-4e06-ad6f-1db7569f2cee}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Package End"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+          SQLTask:SqlStatementSource="DECLARE @RC int&#xA;&#xA;EXECUTE @RC = [dbo].[usp_AuditRecPckExecEnd] &#xA;   @pckID = ?&#xA;  ,@pckStatus = 'Success'&#xA;  ,@pckFlagSuccess = 1&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::pck_PckID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Audit Package Start"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{df8be0e5-3045-494c-b0f8-2f7a87214bb6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Package Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+          SQLTask:SqlStatementSource="DECLARE @RC int&#xA;EXECUTE @RC = [dbo].[usp_AuditRecPckExecStart] &#xA;   @pckParentPckID = ?&#xA;  ,@pckName = ?&#xA;  ,@pckGUID = ?&#xA;  ,@pckBP = ?&#xA;  ,@pckExecDesc = ?&#xA;  ,@pckVersion = ?&#xA;  ,@pckStatus = 'Running'&#xA;  ,@ssis_server_execution_id = ?&#xA;GO"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::pck_PckID" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::pck_ParentPckID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="100" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::ParentContainerGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="38" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::pck_BP"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="25" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::pck_ExecDesc"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::pck_Version"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="25" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="System::ServerExecutionID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PowerBI Report Download"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6141DDFD-8CA8-4E27-90ED-D5163ADA4432}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PowerBI Report Download">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\PowerBI Report Download\On Error"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{8b73c988-ef5c-4a1e-a344-ae6e929ff58d}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="On Error">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\On Error\Set mail_text for end"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{9239180c-c347-42be-b09a-23d6d7d2ff0a}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Set mail_text for end"
+              DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2012; � 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::mail_text_in] = &quot;Report list download failed  &quot; + (DT_WSTR, 20) @[User::insertedRows]  + &quot; added to &quot; +  @[User::target_table_name]" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\On Error\SQL Save Text for End Mail"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{2d202870-1206-4cde-939d-cf5df5e41399}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Save Text for End Mail"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+                  SQLTask:SqlStatementSource="EXECUTE  [dbo].[usp_ssas_mail_string] &#xA;   @text_in = ?&#xA;  ,@start_new_mail = 0&#xA;  ,@log_level = 4&#xA;  ,@mailid_in = ?&#xA;  ,@mail_type = ?&#xA;  ,@mail_subject_suffix = NULL&#xA;  ,@overwrite_text = 0&#xA;  ,@with_timestamp = 1&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::mail_text_in"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::mail_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::mail_type"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\On Error.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{274c54fa-e5ce-4c8a-b192-5a8dc32c0ff7}"
+              DTS:From="Package\PowerBI Report Download\On Error\Set mail_text for end"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\PowerBI Report Download\On Error\SQL Save Text for End Mail" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\PowerBI Report Download\On Success"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{fad63444-3f4e-4b13-a733-0a789ae6b9e0}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="On Success">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\On Success\Set mail_text for end"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{475b4e09-3859-4acd-8e09-fc160254d65e}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Set mail_text for end"
+              DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2012; � 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::mail_text_in] =  (DT_WSTR, 20) @[User::insertedRows] +&quot; reports successfully added to &quot; +  @[User::target_table_name]" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\On Success\SQL Save Text for End Mail"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{2e201eb3-6d17-45f6-b682-068ac078a087}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Save Text for End Mail"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+                  SQLTask:SqlStatementSource="EXECUTE  [dbo].[usp_ssas_mail_string] &#xA;   @text_in = ?&#xA;  ,@start_new_mail = 0&#xA;  ,@log_level = ?&#xA;  ,@mailid_in = ?&#xA;  ,@mail_type = ?&#xA;  ,@mail_subject_suffix  = NULL&#xA;  ,@overwrite_text = 0&#xA;  ,@with_timestamp = 1&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::mail_text_in"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::mail_log_level"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::mail_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::mail_type"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\On Success.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{b8b25f43-58cc-460c-8641-aabf381ce53b}"
+              DTS:From="Package\PowerBI Report Download\On Success\Set mail_text for end"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\PowerBI Report Download\On Success\SQL Save Text for End Mail" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\PowerBI Report Download\Sequence Container"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{2f6a0627-c373-4d9d-97cf-114d7bc8ae74}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Sequence Container">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Audit Package End"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{085cc185-3f02-4bd9-b996-d1e5dd25facb}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Audit Package End"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+                  SQLTask:SqlStatementSource="DECLARE @RC int&#xA;&#xA;EXECUTE @RC = [dbo].[usp_AuditRecPckExecEnd] &#xA;   @pckID = ?&#xA;  ,@pckStatus = 'Success'&#xA;  ,@pckFlagSuccess = 1&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::pck_PckID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Download PowerBI Reports from Azure"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{de4527a2-ee8d-4a1b-8d69-05eb04d7ed7f}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Download PowerBI Reports from Azure">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Download PowerBI Reports from Azure\Download Reports"
+                  DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:Description="Execute Process Task"
+                  DTS:DTSID="{871e46bd-94f7-45aa-af5a-26dd0340371f}"
+                  DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Download Reports"
+                  DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="0">
+                  <DTS:Variables />
+                  <DTS:PropertyExpression
+                    DTS:Name="Arguments">"-F " + @[User::powerShellFilePath]  + @[User::powerShellFileName]   + "  " +  @[$Package::pbiusername] +"  " +  @[$Package::pbipassword] +" " +  @[User::exportFilePath]  + "  "+  @[$Package::exportFileName]</DTS:PropertyExpression>
+                  <DTS:PropertyExpression
+                    DTS:Name="WorkingDirectory">@[User::powerShellFilePath]</DTS:PropertyExpression>
+                  <DTS:ObjectData>
+                    <ExecuteProcessData
+                      Executable="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+                      Arguments="-F C:\var\SQL2012_Test1\share\SSAS\Templates\ExportPowerBIReportScript.ps1  input@spoteffects.com  spefAzure2017! C:\var\SQL2012_Test1\share\SSAS\Transfer\  pbireport.csv"
+                      WorkingDirectory="C:\var\SQL2012_Test1\share\SSAS\Templates\" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{c43f6948-6743-4ff5-9873-e4c16c40c763}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Load Table SSAS_PowerBIReports">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task"
+                  DTS:CreationName="SSIS.Pipeline.3"
+                  DTS:Description="Data Flow Task"
+                  DTS:DTSID="{0a1135b3-cf85-48f7-8e9c-0165e23ec3e1}"
+                  DTS:ExecutableType="SSIS.Pipeline.3"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Data Flow Task"
+                  DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <pipeline
+                      version="1">
+                      <components>
+                        <component
+                          refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports"
+                          componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                          contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                          description="OLE DB Destination"
+                          name="dbo_tmp_SSAS_PowerBIReports"
+                          usesDispositions="true"
+                          version="4">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                              name="CommandTimeout">0</property>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the name of the database object used to open a rowset."
+                              name="OpenRowset">dbo.tmp_SSAS_PowerBIReports</property>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the variable that contains the name of the database object used to open a rowset."
+                              name="OpenRowsetVariable"></property>
+                            <property
+                              dataType="System.String"
+                              description="The SQL command to be executed."
+                              name="SqlCommand"
+                              UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the column code page to use when code page information is unavailable from the data source."
+                              name="DefaultCodePage">1252</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Forces the use of the DefaultCodePage property value when describing character data."
+                              name="AlwaysUseDefaultCodePage">false</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the mode used to access the database."
+                              name="AccessMode"
+                              typeConverter="AccessMode">3</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                              name="FastLoadKeepIdentity">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                              name="FastLoadKeepNulls">false</property>
+                            <property
+                              dataType="System.String"
+                              description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                              name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                              name="FastLoadMaxInsertCommitSize">2147483647</property>
+                          </properties>
+                          <connections>
+                            <connection
+                              refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Connections[OleDbConnection]"
+                              connectionManagerID="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}:external"
+                              connectionManagerRefId="Project.ConnectionManagers[SpotEffects]"
+                              description="The OLE DB runtime connection used to access the database."
+                              name="OleDbConnection" />
+                          </connections>
+                          <inputs>
+                            <input
+                              refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input]"
+                              errorOrTruncationOperation="Insert"
+                              errorRowDisposition="FailComponent"
+                              hasSideEffects="true"
+                              name="OLE DB Destination Input">
+                              <inputColumns>
+                                <inputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].Columns[ReportID]"
+                                  cachedDataType="wstr"
+                                  cachedLength="100"
+                                  cachedName="ReportID"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportID]"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportID]" />
+                                <inputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].Columns[ReportName]"
+                                  cachedDataType="wstr"
+                                  cachedLength="50"
+                                  cachedName="ReportName"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportName]"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportName]" />
+                                <inputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].Columns[ReportURL]"
+                                  cachedDataType="wstr"
+                                  cachedLength="200"
+                                  cachedName="ReportURL"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportURL]"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportURL]" />
+                                <inputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].Columns[ReportDatasetID]"
+                                  cachedDataType="wstr"
+                                  cachedLength="100"
+                                  cachedName="ReportDatasetID"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportDatasetID]"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportDatasetID]" />
+                                <inputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].Columns[WorkspaceID]"
+                                  cachedDataType="wstr"
+                                  cachedLength="100"
+                                  cachedName="WorkspaceID"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[WorkspaceID]"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[WorkspaceID]" />
+                                <inputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].Columns[WorkspaceName]"
+                                  cachedDataType="wstr"
+                                  cachedLength="50"
+                                  cachedName="WorkspaceName"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[WorkspaceName]"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[WorkspaceName]" />
+                              </inputColumns>
+                              <externalMetadataColumns
+                                isUsed="True">
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportID]"
+                                  dataType="wstr"
+                                  length="100"
+                                  name="ReportID" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportName]"
+                                  dataType="wstr"
+                                  length="50"
+                                  name="ReportName" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportURL]"
+                                  dataType="wstr"
+                                  length="200"
+                                  name="ReportURL" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[ReportDatasetID]"
+                                  dataType="wstr"
+                                  length="100"
+                                  name="ReportDatasetID" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[WorkspaceID]"
+                                  dataType="wstr"
+                                  length="100"
+                                  name="WorkspaceID" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input].ExternalColumns[WorkspaceName]"
+                                  dataType="wstr"
+                                  length="50"
+                                  name="WorkspaceName" />
+                              </externalMetadataColumns>
+                            </input>
+                          </inputs>
+                          <outputs>
+                            <output
+                              refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Outputs[OLE DB Destination Error Output]"
+                              exclusionGroup="1"
+                              isErrorOut="true"
+                              name="OLE DB Destination Error Output"
+                              synchronousInputId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input]">
+                              <outputColumns>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                                  dataType="i4"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                                  name="ErrorCode"
+                                  specialFlags="1" />
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                                  dataType="i4"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                                  name="ErrorColumn"
+                                  specialFlags="2" />
+                              </outputColumns>
+                              <externalMetadataColumns />
+                            </output>
+                          </outputs>
+                        </component>
+                        <component
+                          refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport"
+                          componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                          contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                          description="Flat File Source"
+                          localeId="1033"
+                          name="SSASProcessPBIReport"
+                          usesDispositions="true"
+                          version="1">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Specifies whether zero-length columns are treated as null."
+                              name="RetainNulls">false</property>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                              name="FileNameColumnName"></property>
+                          </properties>
+                          <connections>
+                            <connection
+                              refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Connections[FlatFileConnection]"
+                              connectionManagerID="Package.ConnectionManagers[SSASProcessPBIReport]"
+                              connectionManagerRefId="Package.ConnectionManagers[SSASProcessPBIReport]"
+                              name="FlatFileConnection" />
+                          </connections>
+                          <outputs>
+                            <output
+                              refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output]"
+                              name="Flat File Source Output">
+                              <outputColumns>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportID]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportID]"
+                                  length="100"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportID]"
+                                  name="ReportID"
+                                  truncationRowDisposition="FailComponent">
+                                  <properties>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                      name="FastParse">false</property>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the data is in binary format."
+                                      name="UseBinaryFormat">false</property>
+                                  </properties>
+                                </outputColumn>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportName]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportName]"
+                                  length="50"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportName]"
+                                  name="ReportName"
+                                  truncationRowDisposition="FailComponent">
+                                  <properties>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                      name="FastParse">false</property>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the data is in binary format."
+                                      name="UseBinaryFormat">false</property>
+                                  </properties>
+                                </outputColumn>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportURL]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportURL]"
+                                  length="200"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportURL]"
+                                  name="ReportURL"
+                                  truncationRowDisposition="FailComponent">
+                                  <properties>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                      name="FastParse">false</property>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the data is in binary format."
+                                      name="UseBinaryFormat">false</property>
+                                  </properties>
+                                </outputColumn>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportDatasetID]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportDatasetID]"
+                                  length="100"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[ReportDatasetID]"
+                                  name="ReportDatasetID"
+                                  truncationRowDisposition="FailComponent">
+                                  <properties>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                      name="FastParse">false</property>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the data is in binary format."
+                                      name="UseBinaryFormat">false</property>
+                                  </properties>
+                                </outputColumn>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[WorkspaceID]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[WorkspaceID]"
+                                  length="100"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[WorkspaceID]"
+                                  name="WorkspaceID"
+                                  truncationRowDisposition="FailComponent">
+                                  <properties>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                      name="FastParse">false</property>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the data is in binary format."
+                                      name="UseBinaryFormat">false</property>
+                                  </properties>
+                                </outputColumn>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[WorkspaceName]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[WorkspaceName]"
+                                  length="50"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].Columns[WorkspaceName]"
+                                  name="WorkspaceName"
+                                  truncationRowDisposition="FailComponent">
+                                  <properties>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                      name="FastParse">false</property>
+                                    <property
+                                      dataType="System.Boolean"
+                                      description="Indicates whether the data is in binary format."
+                                      name="UseBinaryFormat">false</property>
+                                  </properties>
+                                </outputColumn>
+                              </outputColumns>
+                              <externalMetadataColumns
+                                isUsed="True">
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportID]"
+                                  dataType="wstr"
+                                  length="100"
+                                  name="ReportID" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportName]"
+                                  dataType="wstr"
+                                  length="50"
+                                  name="ReportName" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportURL]"
+                                  dataType="wstr"
+                                  length="200"
+                                  name="ReportURL" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[ReportDatasetID]"
+                                  dataType="wstr"
+                                  length="100"
+                                  name="ReportDatasetID" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[WorkspaceID]"
+                                  dataType="wstr"
+                                  length="100"
+                                  name="WorkspaceID" />
+                                <externalMetadataColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output].ExternalColumns[WorkspaceName]"
+                                  dataType="wstr"
+                                  length="50"
+                                  name="WorkspaceName" />
+                              </externalMetadataColumns>
+                            </output>
+                            <output
+                              refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output]"
+                              isErrorOut="true"
+                              name="Flat File Source Error Output">
+                              <outputColumns>
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                                  codePage="1252"
+                                  dataType="text"
+                                  description="Flat File Source Error Output Column"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                                  name="Flat File Source Error Output Column" />
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                                  dataType="i4"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                                  name="ErrorCode"
+                                  specialFlags="1" />
+                                <outputColumn
+                                  refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                                  dataType="i4"
+                                  lineageId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                                  name="ErrorColumn"
+                                  specialFlags="2" />
+                              </outputColumns>
+                              <externalMetadataColumns />
+                            </output>
+                          </outputs>
+                        </component>
+                      </components>
+                      <paths>
+                        <path
+                          refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task.Paths[Flat File Source Output]"
+                          endId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports.Inputs[OLE DB Destination Input]"
+                          name="Flat File Source Output"
+                          startId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport.Outputs[Flat File Source Output]" />
+                      </paths>
+                    </pipeline>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Exec usp_ssas_merge_lkp_SSAS_PowerBIReports"
+                  DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:Description="Execute SQL Task"
+                  DTS:DTSID="{5210f9f4-ae90-487e-a3b8-04b91e0029be}"
+                  DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Exec usp_ssas_merge_lkp_SSAS_PowerBIReports"
+                  DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="0">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <SQLTask:SqlTaskData
+                      SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+                      SQLTask:SqlStatementSource="EXECUTE dbo.usp_ssas_merge_lkp_SSAS_PowerBIReports"
+                      SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                      <SQLTask:ResultBinding
+                        SQLTask:ResultName="insert"
+                        SQLTask:DtsVariableName="User::insertedRows" />
+                    </SQLTask:SqlTaskData>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Truncate tmp_SSAS_PowerBIReports"
+                  DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:Description="Execute SQL Task"
+                  DTS:DTSID="{eafbec5b-3e63-497a-939b-8af8bb760880}"
+                  DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Truncate tmp_SSAS_PowerBIReports"
+                  DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="0">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <SQLTask:SqlTaskData
+                      SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+                      SQLTask:SqlStatementSource="Truncate table dbo.tmp_SSAS_PowerBIReports" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports.PrecedenceConstraints[Constraint]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{083c4f3c-d30e-4f9f-8de9-2d53c004712f}"
+                  DTS:From="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Truncate tmp_SSAS_PowerBIReports"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint"
+                  DTS:To="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task" />
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports.PrecedenceConstraints[Constraint 1]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{9ee76cc4-ad42-4ee6-8dfb-bf3d27bfa41d}"
+                  DTS:From="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint 1"
+                  DTS:To="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Exec usp_ssas_merge_lkp_SSAS_PowerBIReports" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Move to Archive"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="File System Task"
+              DTS:DTSID="{87f3ee15-8555-4ef5-ba4f-c491c448c2c0}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Move to Archive"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="2">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="MoveFile"
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::processedfilename"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="SSASArchiv" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Move to Error"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="File System Task"
+              DTS:DTSID="{102bf556-0a4d-44aa-8418-e19d010e3d9f}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Move to Error"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="MoveFile"
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::processedfilename"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="SSASError" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Move to Process"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="File System Task"
+              DTS:DTSID="{9a16a33b-a8a4-4acb-9838-2c26c3097bcd}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Move to Process"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="MoveFile"
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::exportFullName"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="SSASProcess" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\PowerBI Report Download\Sequence Container\Start New Mail"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{914e4f21-06c9-4d09-aa3b-16733bab1876}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Start New Mail">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Start New Mail\Set mail_text for start"
+                  DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:Description="Expression Task"
+                  DTS:DTSID="{b2cca30a-2439-4aa0-8c8d-5a6ee132c11b}"
+                  DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Set mail_text for start"
+                  DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2012; � 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="0">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExpressionTask
+                      Expression="@[User::mail_text_in] = &quot;Dowload of PowerBI Reports from Azure &quot;" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Start New Mail\SQL Start new Mail"
+                  DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:Description="Execute SQL Task"
+                  DTS:DTSID="{11f472ed-64c5-4ab2-a48b-8f224fc99c85}"
+                  DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="SQL Start new Mail"
+                  DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="0">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <SQLTask:SqlTaskData
+                      SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+                      SQLTask:SqlStatementSource="EXECUTE  [dbo].[usp_ssas_mail_string] &#xA;   @text_in = ?&#xA;  ,@start_new_mail = 1&#xA;  ,@log_level = ?&#xA;  ,@mailid_in = -1&#xA;  ,@mailid_out = ? OUTPUT&#xA;  ,@mail_type = ?&#xA;  ,@mail_subject_suffix = NULL&#xA;  ,@overwrite_text = 0&#xA;  ,@with_timestamp = 1&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                      <SQLTask:ParameterBinding
+                        SQLTask:ParameterName="0"
+                        SQLTask:DtsVariableName="User::mail_text_in"
+                        SQLTask:ParameterDirection="Input"
+                        SQLTask:DataType="130"
+                        SQLTask:ParameterSize="-1" />
+                      <SQLTask:ParameterBinding
+                        SQLTask:ParameterName="1"
+                        SQLTask:DtsVariableName="User::mail_log_level"
+                        SQLTask:ParameterDirection="Input"
+                        SQLTask:DataType="20"
+                        SQLTask:ParameterSize="-1" />
+                      <SQLTask:ParameterBinding
+                        SQLTask:ParameterName="2"
+                        SQLTask:DtsVariableName="User::mail_id"
+                        SQLTask:ParameterDirection="Output"
+                        SQLTask:DataType="20"
+                        SQLTask:ParameterSize="-1" />
+                      <SQLTask:ParameterBinding
+                        SQLTask:ParameterName="3"
+                        SQLTask:DtsVariableName="User::mail_type"
+                        SQLTask:ParameterDirection="Input"
+                        SQLTask:DataType="130"
+                        SQLTask:ParameterSize="-1" />
+                    </SQLTask:SqlTaskData>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\PowerBI Report Download\Sequence Container\Start New Mail.PrecedenceConstraints[Constraint]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{2077e325-5430-4ce9-ab37-2765a54992ce}"
+                  DTS:From="Package\PowerBI Report Download\Sequence Container\Start New Mail\Set mail_text for start"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint"
+                  DTS:To="Package\PowerBI Report Download\Sequence Container\Start New Mail\SQL Start new Mail" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{4a920668-84f8-4fb9-a36f-942eb0e74abf}"
+              DTS:From="Package\PowerBI Report Download\Sequence Container\Download PowerBI Reports from Azure"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\PowerBI Report Download\Sequence Container\Move to Process" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{99e06b0e-abd0-4f42-b5fa-b5e2e4d3630b}"
+              DTS:From="Package\PowerBI Report Download\Sequence Container\Move to Process"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{4e8effbf-73b2-4c37-8ccb-f138cc8aac88}"
+              DTS:From="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\PowerBI Report Download\Sequence Container\Move to Archive" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{0703ccf1-a85a-47ab-bdb9-d75d65d8ae5a}"
+              DTS:From="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\PowerBI Report Download\Sequence Container\Move to Error"
+              DTS:Value="1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 5]"
+              DTS:CreationName=""
+              DTS:DTSID="{73831c4a-8884-42e0-95e2-8cad69cb244e}"
+              DTS:From="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 5"
+              DTS:To="Package\PowerBI Report Download\Sequence Container\Audit Package End" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 6]"
+              DTS:CreationName=""
+              DTS:DTSID="{d795b7ba-4c7b-44d5-9aca-e2d0b5ef3240}"
+              DTS:From="Package\PowerBI Report Download\Sequence Container\Start New Mail"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 6"
+              DTS:To="Package\PowerBI Report Download\Sequence Container\Download PowerBI Reports from Azure" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\PowerBI Report Download.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{2CFFD576-0A7D-4C22-B75C-A7C6A43F646C}"
+          DTS:From="Package\PowerBI Report Download\Sequence Container"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\PowerBI Report Download\On Success" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\PowerBI Report Download.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{210BB22C-6C11-4C4E-8B02-C3F71A32CE53}"
+          DTS:From="Package\PowerBI Report Download\Sequence Container"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\PowerBI Report Download\On Error"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send mail"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{84509d4e-8f7b-48c5-a4b4-a841b8eb584b}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send mail"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[usp_ssas_send_mails] @mail_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::mail_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{543B727B-CAA8-4B16-B454-38E2F17D7D1B}"
+      DTS:From="Package\Audit Package Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\PowerBI Report Download" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{2D6DCFA7-ACD5-4D8E-8774-2BEC7E1685C2}"
+      DTS:From="Package\PowerBI Report Download"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Audit Package End" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{41DE3C09-BF5F-4BCC-AC29-A97F0478F68E}"
+      DTS:From="Package\PowerBI Report Download"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Send mail"
+      DTS:Value="2" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{C40030A6-A4D0-46A1-A854-4B759B7B3093}"
+      DTS:EventID="375112036"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{60432786-856D-4CB7-A77C-A0E86EAFBC01}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Audit Package Error"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{79be6c0f-60d9-4a9e-b512-41bf26b3e7ad}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Audit Package Error"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7B1CF99B-83C1-4D24-BA63-52949EDD0848}"
+              SQLTask:SqlStatementSource="DECLARE @RC int&#xA;EXECUTE @RC = [dbo].[usp_AuditRecPckExecEnd] &#xA;   @pckID = ?&#xA;  ,@pckStatus = 'Error'&#xA;  ,@pckFlagSuccess = 0&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::pck_PckID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Audit Package End"
+          TopLeft="636,2176" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Audit Package Start"
+          TopLeft="378,69" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Send mail"
+          TopLeft="173,2177" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\PowerBI Report Download\On Error\Set mail_text for end"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\PowerBI Report Download\On Error\SQL Save Text for End Mail"
+          TopLeft="23,116.5" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\On Error.PrecedenceConstraints[Constraint]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="264,225"
+          Size="264,268"
+          Id="Package\PowerBI Report Download\On Error"
+          TopLeft="464,1477" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\PowerBI Report Download\On Success\Set mail_text for end"
+          TopLeft="68.5,29.5" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\PowerBI Report Download\On Success\SQL Save Text for End Mail"
+          TopLeft="47,112.5" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\On Success.PrecedenceConstraints[Constraint]"
+          TopLeft="154,71.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="44"
+          IsExpanded="True"
+          PanelSize="295,205"
+          Size="295,249"
+          Id="Package\PowerBI Report Download\On Success"
+          TopLeft="43,1471" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Audit Package End"
+          TopLeft="666,951" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Download PowerBI Reports from Azure\Download Reports"
+          TopLeft="17,13" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205,110"
+          Size="205,153"
+          Id="Package\PowerBI Report Download\Sequence Container\Download PowerBI Reports from Azure"
+          TopLeft="168,453" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task"
+          TopLeft="83,140" />
+        <NodeLayout
+          Size="313,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Exec usp_ssas_merge_lkp_SSAS_PowerBIReports"
+          TopLeft="29,227" />
+        <NodeLayout
+          Size="254,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Truncate tmp_SSAS_PowerBIReports"
+          TopLeft="34,31" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports.PrecedenceConstraints[Constraint]"
+          TopLeft="159.75,73">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports.PrecedenceConstraints[Constraint 1]"
+          TopLeft="158.5,182">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27,45"
+              Start="0,0"
+              End="27,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="23,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23,22.5"
+                    Point2="27,22.5"
+                    Point3="27,26.5" />
+                  <mssgle:LineSegment
+                    End="27,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="397,370"
+          Size="397,413"
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports"
+          TopLeft="140,728" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Move to Archive"
+          TopLeft="630,607" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Move to Error"
+          TopLeft="648,799" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Move to Process"
+          TopLeft="191,645" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Start New Mail\Set mail_text for start"
+          TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Start New Mail\SQL Start new Mail"
+          TopLeft="12.5,107.5" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container\Start New Mail.PrecedenceConstraints[Constraint]"
+          TopLeft="96.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="193,205"
+          Size="193,248"
+          Id="Package\PowerBI Report Download\Sequence Container\Start New Mail"
+          TopLeft="176,142" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="269.75,606">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="271.333333333333,687">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="403.333333333333,728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="303.666666666667,-79"
+              Start="0,0"
+              End="303.666666666667,-71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-27.7902659307577" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-27.7902659307577"
+                    Point2="0,-31.7902659307577"
+                    Point3="4,-31.7902659307577" />
+                  <mssgle:LineSegment
+                    End="299.666666666667,-31.7902659307577" />
+                  <mssgle:CubicBezierSegment
+                    Point1="299.666666666667,-31.7902659307577"
+                    Point2="303.666666666667,-31.7902659307577"
+                    Point3="303.666666666667,-35.7902659307577" />
+                  <mssgle:LineSegment
+                    End="303.666666666667,-71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="537,867">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111,-47"
+              Start="0,0"
+              End="103.5,-47">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="40.657018813314,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.657018813314,0"
+                    Point2="44.657018813314,0"
+                    Point3="44.657018813314,-4" />
+                  <mssgle:LineSegment
+                    End="44.657018813314,-43" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44.657018813314,-43"
+                    Point2="44.657018813314,-47"
+                    Point3="48.657018813314,-47" />
+                  <mssgle:LineSegment
+                    End="103.5,-47" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="29.415671157064,1,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          TopLeft="537,1002">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="129,-30"
+              Start="0,0"
+              End="121.5,-30">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="47.8986975397974,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="47.8986975397974,0"
+                    Point2="51.8986975397974,0"
+                    Point3="51.8986975397974,-4" />
+                  <mssgle:LineSegment
+                    End="51.8986975397974,-26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.8986975397974,-26"
+                    Point2="51.8986975397974,-30"
+                    Point3="55.8986975397974,-30" />
+                  <mssgle:LineSegment
+                    End="121.5,-30" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          TopLeft="271.5,390">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="838,1283"
+          Size="838,1326"
+          Id="Package\PowerBI Report Download\Sequence Container"
+          TopLeft="60,58" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download.PrecedenceConstraints[Constraint]"
+          TopLeft="479,1384">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-288.5,87"
+              Start="0,0"
+              End="-288.5,79.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.5"
+                    Point2="0,43.5"
+                    Point3="-4,43.5" />
+                  <mssgle:LineSegment
+                    End="-284.5,43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-284.5,43.5"
+                    Point2="-288.5,43.5"
+                    Point3="-288.5,47.5" />
+                  <mssgle:LineSegment
+                    End="-288.5,79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PowerBI Report Download.PrecedenceConstraints[Constraint 1]"
+          TopLeft="617.333333333333,1384">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21.3333333333333,93"
+              Start="0,0"
+              End="-21.3333333333333,85.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.3063363506432" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.3063363506432"
+                    Point2="0,37.3063363506432"
+                    Point3="-4,37.3063363506432" />
+                  <mssgle:LineSegment
+                    End="-17.3333333333333,37.3063363506432" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17.3333333333333,37.3063363506432"
+                    Point2="-21.3333333333333,37.3063363506432"
+                    Point3="-21.3333333333333,41.3063363506432" />
+                  <mssgle:LineSegment
+                    End="-21.3333333333333,85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.9080143229166,42.3063363506432,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="904,1800"
+          Size="904,1843"
+          Id="Package\PowerBI Report Download"
+          TopLeft="112,202" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="464,111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100,91"
+              Start="0,0"
+              End="100,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.5"
+                    Point2="0,45.5"
+                    Point3="4,45.5" />
+                  <mssgle:LineSegment
+                    End="96,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96,45.5"
+                    Point2="100,45.5"
+                    Point3="100,49.5" />
+                  <mssgle:LineSegment
+                    End="100,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="716.666666666667,2045">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,131"
+              Start="0,0"
+              End="0,123.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,123.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="414.666666666667,2045">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-179.166666666667,132"
+              Start="0,0"
+              End="-179.166666666667,124.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.9399293286219" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48.9399293286219"
+                    Point2="0,52.9399293286219"
+                    Point3="-4,52.9399293286219" />
+                  <mssgle:LineSegment
+                    End="-175.166666666667,52.9399293286219" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-175.166666666667,52.9399293286219"
+                    Point2="-179.166666666667,52.9399293286219"
+                    Point3="-179.166666666667,56.9399293286219" />
+                  <mssgle:LineSegment
+                    End="-179.166666666667,124.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-114.887786458333,57.9399293286219,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="172,42"
+          Id="Package.EventHandlers[OnError]\Audit Package Error"
+          TopLeft="NaN,NaN" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="186,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\SSASProcessPBIReport"
+          TopLeft="148,101" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task\dbo_tmp_SSAS_PowerBIReports"
+          TopLeft="125,282" />
+        <EdgeLayout
+          Id="Package\PowerBI Report Download\Sequence Container\Load Table SSAS_PowerBIReports\Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="241,143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,139"
+              Start="0,0"
+              End="0,131.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,131.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
